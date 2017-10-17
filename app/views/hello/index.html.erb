@@ -1,4 +1,13 @@
-<h1>Hello#index</h1>
-<p>Find me in app/views/hello/index.html.erb</p>
-<button type="button" class="btn btn-primary">Primary</button>
-<button type="button" class="btn btn-info">Info</button>
+<div id="app" class="container">
+  <div class="form-group">
+    <label>Email</label>
+    <input v-model="userInfo.email" type="email" class="form-control" placeholder="sample@example.com">
+  </div>
+  <div class="form-group">
+    <label>Tel</label>
+    <input v-model="userInfo.tel" type="text" class="form-control" placeholder="0311112222">
+    <span v-show="!validationTel">Telは数値で入力してください</span>
+  </div>
+  <button :disabled="isBlank" type="button" class="btn btn-info">Next</button>
+  <span v-show="isBlank">未入力の項目があります</span>
+</div>
