@@ -1,13 +1,19 @@
 <div id="app" class="container">
+  <h1>Form Example</h1>
   <div class="form-group">
-    <label>Email</label>
-    <input v-model="userInfo.email" type="email" class="form-control" placeholder="sample@example.com">
+    <label>Email [必須]</label>
+    <input v-model="userInfo.email" type="email" class="form-control" placeholder="例) sample@example.com">
+    <span v-show="!validateEmail" class="text-warning">正しいEmailを入力してください</span>
   </div>
   <div class="form-group">
-    <label>Tel</label>
-    <input v-model="userInfo.tel" type="text" class="form-control" placeholder="0311112222">
-    <span v-show="!validationTel">Telは数値で入力してください</span>
+    <label>Tel [必須]</label>
+    <input v-model="userInfo.tel" type="text" class="form-control" placeholder="例) 0311112222">
+    <span v-show="!validateTel" class="text-warning">Telは数値で入力してください</span>
   </div>
-  <button :disabled="isBlank" type="button" class="btn btn-info">Next</button>
-  <span v-show="isBlank">未入力の項目があります</span>
+  <div class="form-group">
+    <label>ユーザー名</label>
+    <input v-model="userInfo.userName" type="text" class="form-control" placeholder="例) user-1">
+    <span v-show="!validateUserName" class="text-warning">ユーザー名は半角英数字で入力してください</span>
+  </div>
+  <button :disabled="!validation" type="button" class="btn btn-info">Next</button>
 </div>

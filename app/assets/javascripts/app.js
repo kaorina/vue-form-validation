@@ -4,20 +4,31 @@ $(function () {
     data: {
       userInfo: {
         email: '',
-        tel: ''
+        tel: '',
+        userName: ''
       }
     },
     computed: {
-      isBlank: function () {
-        // 未入力かどうかのチェック
-        var userInfo = this.userInfo;
-        for (key in userInfo) {
-          if (userInfo[key].trim().length === 0) return true;
-        };
+      validation: function () {
+        return (this.validateTel &&
+                this.validateEmail &&
+                this.validateUserName);
       },
-      validationTel: function () {
-        // 空白削除後、数値かどうかのチェック(正規表現を使うべき？？)
-        return (isNaN(this.userInfo.tel.trim())) ? false : true;
+      validateTel: function () {
+        var pattern = /^\d+$/; // 1文字以上の整数のみ許容
+        return pattern.test(this.userInfo.tel.trim());
+      },
+      validateEmail: function () {
+        var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(this.userInfo.email);
+      },
+      validateUserName: function () {
+        if (this.userInfo.userName.length === 0) {
+          return true;
+        } else {
+          var pattern = /^\w+$/; // 大文字小文字英数字、アンダースコアのみ許容
+          return pattern.test(this.userInfo.userName);
+        }
       }
     }
   });
